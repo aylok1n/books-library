@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        Books library
+    </title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<body>
+    <!-- <div class="myFavorite">Мои любимые</div>
+    <div class="myBooks">Мои книги</div> -->
+    <div class="addBook">
+        Добавить книгу
+        <div>
+            <p><input name="add" type="radio" id="upload"> Загрузить из файла </p>
+            <p><input name="add" type="radio" id="wtite" > Написать самому </p>
+        </div>
+
+        <form class="addBook__form" name="uploadForm" enctype="multipart/form-data">
+            Название
+            <input class="addBook__form-name" type="text" name="login">
+            <input class="addBook__form-file" type="file" name="file" accept="text/*">
+            <input class="addBook__form-button" type="button" value="Загрузить...">
+        </form>
+        
+        <form class="addBook__form" name="writeForm" enctype="multipart/form-data">
+            Название
+            <input class="addBook__form-name"  type="text" name="login">
+            <textarea class="addBook__form-text"  placeholder="Текст..." name="text"></textarea>
+            <input class="addBook__form-button" type="button" value="Загрузить..." >
+        </form>
+    </div>
+    <!-- <div class="readBook">читать</div> -->
+
+    <script src="./js/main.js"></script>
+</body>

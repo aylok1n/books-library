@@ -1,0 +1,18 @@
+.addBook__form{
+    display: none;
+    flex-direction: column;
+    width: 250px;
+}
+.addBook__form-name{
+    margin-bottom: 20px;
+}
+.addBook__form-button{
+    width: 100px;
+    margin: 20px 0px;
+}
+.addBook__form-text{
+    height:200px;
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+}
