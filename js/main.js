@@ -2,6 +2,8 @@ const upload = document.getElementById('upload');
 const write = document.getElementById('wtite');
 const uploadForm = document.forms.uploadForm;
 const writeForm = document.forms.writeForm;
+let Books = [];
+localStorage['Books'] != undefined ? Books = JSON.parse(localStorage['Books']) : console.log(localStorage['Books'])
 
 upload.addEventListener("change", function(){
     if(this.checked){
@@ -17,6 +19,7 @@ write.addEventListener("change", function(){
 });
 uploadForm.elements[2].addEventListener('click', sendBook);
 writeForm.elements[2].addEventListener('click', writeBook);
+
 function sendBook(){
     let formData = new FormData(uploadForm);
     let xhr = new XMLHttpRequest();
@@ -27,7 +30,12 @@ function sendBook(){
             alert('Введите валидные значения')
         }
         else{
-            localStorage.setItem(formData.get('login'), JSON.parse(this.response).text)
+            Books.push({
+                login:formData.get('login'),
+                text:JSON.parse(this.response).text,
+                id: new Date()
+            });
+            localStorage.setItem('Books', JSON.stringify(Books));
             uploadForm.submit()
         }
       }
@@ -39,7 +47,12 @@ function writeBook(){
         alert('Введите валидные значения')
     }
     else{
-        localStorage.setItem(formData.get('login'), formData.get('text'))
+        Books.push({
+            login: formData.get('login'), 
+            text:formData.get('text'),
+            id: new Date()
+        })
+        localStorage.setItem('Books', JSON.stringify(Books))
         uploadForm.submit()
     }
 }
