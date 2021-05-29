@@ -1,14 +1,12 @@
 let booksArr = localStorage['Books']
 localStorage['Books'] != undefined ? booksArr = JSON.parse(localStorage['Books']) : console.log('localStorage пуст')
-const arr = booksArr.reverse()
-const sad = arr.reverse()
+
 function renderBooks(){
     let myBooks = document.querySelector('.myBooks__books')
     myBooks.innerHTML = ''
 
     if(localStorage['Books'] != undefined){
-        sort()
-        console.log(arr, booksArr, sad)
+        let arr = booksArr.reverse()
         for(let i = 0; i < arr.length ; i++){
             let id = arr[i].id.toString()
     
@@ -53,11 +51,11 @@ function renderBooks(){
     }
 }
 
-function sort(){
-    // const arr = booksArr.reverse()
+// function sort(){
+//     // const arr = booksArr.reverse()
     
-    return arr
-}
+//     return arr
+// }
 
 function readBook(id){
     console.log('Читать ' + id)
@@ -75,7 +73,7 @@ function delBook(id){
     booksArr.splice(num, 1)
     console.log(booksArr)
     localStorage.setItem('Books', JSON.stringify(booksArr))
-    renderBooks
+    renderBooks()
 }
 
 function changeStatusBook(id){
