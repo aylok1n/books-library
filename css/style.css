@@ -1,7 +1,21 @@
+body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    border-right: black 3px solid;
+}
+.section-name{
+    background-color: gray;
+}
 .addBook__form{
     display: none;
     flex-direction: column;
-    width: 250px;
+    
 }
 .addBook__form-name{
     margin-bottom: 20px;
@@ -15,4 +29,30 @@
     display: flex;
     justify-content: start;
     align-items: flex-start;
+}
+.book_card{
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    background-color: gainsboro;
+}
+.book_card-name{
+    width: 200px;
+}
+.book_card-button{
+    border: 1px white solid;
+    border-radius: 30px;
+    margin: 0 5px;
+}
+
+.readBook{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.readBook__area{
+    margin: 50px;
+    width: 500px;
+    text-align: left;
+    word-wrap:break-word;
 }

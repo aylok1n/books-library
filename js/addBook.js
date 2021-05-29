@@ -3,7 +3,7 @@ const write = document.getElementById('wtite');
 const uploadForm = document.forms.uploadForm;
 const writeForm = document.forms.writeForm;
 let Books = [];
-localStorage['Books'] != undefined ? Books = JSON.parse(localStorage['Books']) : console.log(localStorage['Books'])
+localStorage['Books'] != undefined ? Books = JSON.parse(localStorage['Books']) : console.log('localStorage пуст')
 
 upload.addEventListener("change", function(){
     if(this.checked){
