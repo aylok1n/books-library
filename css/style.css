@@ -35,14 +35,25 @@ body{
     flex-direction: row;
     margin: 5px;
     background-color: gainsboro;
+    align-items: center;
+}
+.book_card-wasRead{
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    background-color: #00FF7F;
+    align-items: center;
 }
 .book_card-name{
     width: 200px;
+    word-wrap: break-word
 }
 .book_card-button{
     border: 1px white solid;
     border-radius: 30px;
     margin: 0 5px;
+    height: 20px;
+    
 }
 
 .readBook{

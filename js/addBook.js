@@ -2,8 +2,6 @@ const upload = document.getElementById('upload');
 const write = document.getElementById('wtite');
 const uploadForm = document.forms.uploadForm;
 const writeForm = document.forms.writeForm;
-let Books = [];
-localStorage['Books'] != undefined ? Books = JSON.parse(localStorage['Books']) : console.log('localStorage пуст')
 
 upload.addEventListener("change", function(){
     if(this.checked){
@@ -21,6 +19,8 @@ uploadForm.elements[2].addEventListener('click', sendBook);
 writeForm.elements[2].addEventListener('click', writeBook);
 
 function sendBook(){
+    let Books = [];
+    localStorage['Books'] != undefined ? Books = JSON.parse(localStorage['Books']) : console.log('localStorage пуст')
     let formData = new FormData(uploadForm);
     let xhr = new XMLHttpRequest();
     xhr.open("POST", 'https://apiinterns.osora.ru/');
@@ -33,7 +33,8 @@ function sendBook(){
             Books.push({
                 login:formData.get('login'),
                 text:JSON.parse(this.response).text,
-                id: Date.now()
+                id: Date.now(),
+                wasRead: false
             });
             localStorage.setItem('Books', JSON.stringify(Books));
             uploadForm.submit()
@@ -42,6 +43,8 @@ function sendBook(){
     xhr.send(formData);
 }
 function writeBook(){
+    let Books = [];
+    localStorage['Books'] != undefined ? Books = JSON.parse(localStorage['Books']) : console.log('localStorage пуст')
     let formData = new FormData(writeForm);
     if(formData.get('login') == '' || formData.get('text') == ''){
         alert('Введите валидные значения')
@@ -50,7 +53,8 @@ function writeBook(){
         Books.push({
             login: formData.get('login'), 
             text:formData.get('text'),
-            id: Date.now()
+            id: Date.now(),
+            wasRead: false
         })
         localStorage.setItem('Books', JSON.stringify(Books))
         uploadForm.submit()
