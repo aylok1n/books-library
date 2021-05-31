@@ -2,23 +2,34 @@ function renderBooks(){
     sort()
     let myBooks = document.querySelector('.myBooks__books')
     myBooks.innerHTML = ''
+    let favBooks = document.querySelector('.myFavorite__books')
+    favBooks.innerHTML = ''
     let booksArr = localStorage['Books']
     localStorage['Books'] != undefined ? booksArr = JSON.parse(localStorage['Books']) : console.log('localStorage пуст')
 
     if(localStorage['Books'] != undefined){
         let arr = booksArr
-        
+
         for(let i = 0; i < arr.length ; i++){
             let id = arr[i].id.toString()
     
             let book = document.createElement('div');
             myBooks.appendChild(book);
+
+            if(arr[i].isFavorite == true){
+                favBooks.appendChild(book);
+            }
+
             if (arr[i].wasRead == false){
                 book.classList.add('book_card');
             } else{
                 book.classList.add('book_card-wasRead')
             }
+
             book.setAttribute('id', id)
+            book.setAttribute('draggable', 'true')
+            book.ondragstart = dragStart
+            book.ondragend = dragEnd
     
             let bookName = document.createElement('div');
             book.appendChild(bookName);
@@ -56,10 +67,41 @@ function renderBooks(){
     }
 }
 
+//drag and drop
+const dropzone = document.querySelector('.dropzone-start')
+dropzone.ondragover = allowDrop;
+dropzone.ondrop = drop
+    
+function allowDrop(event){
+    event.preventDefault();
+}
+function dragStart(event){
+    dropzone.classList.add('dropzone-drop')
+    event.dataTransfer.setData('id', event.target.id)
+    console.log(event.target.id)
+    dropzone.innerHTML = 'Перенесите вашу книгу в данную область'
+}
+function dragEnd(){
+    dropzone.classList.remove('dropzone-drop')
+    dropzone.classList.add('dropzone-start')
+    dropzone.innerHTML = ''
+}
+
+function drop(event){
+    let itemId = event.dataTransfer.getData('id')
+    let booksArr = localStorage['Books']
+    localStorage['Books'] != undefined ? booksArr = JSON.parse(localStorage['Books']) : console.log('localStorage пуст')
+    let item = booksArr.find(book => book.id === Number(itemId))
+    let num =  booksArr.indexOf(item)
+    booksArr[num].isFavorite = true
+    localStorage.setItem('Books', JSON.stringify(booksArr))
+    renderBooks()
+}
+
 function sort(){
     let prevArr = localStorage['Books']
     localStorage['Books'] != undefined ? prevArr = JSON.parse(localStorage['Books']) : console.log('localStorage пуст')
-    // console.log(prevArr)
+
     let readArr = []
     let unreadArr = []
     for(let i = 0; i < prevArr.length; i++){
@@ -82,7 +124,7 @@ function sort(){
 function readBook(id){
     let booksArr = localStorage['Books']
     localStorage['Books'] != undefined ? booksArr = JSON.parse(localStorage['Books']) : console.log('localStorage пуст')
-    console.log('Читать ' + id)
+    console.log(typeof(id))
     let item = booksArr.find(book => book.id === id)
     let readArea = document.createElement('div')
     let oldArea = document.getElementsByClassName('readBook__area')
@@ -100,7 +142,6 @@ function delBook(id){
     console.log(booksArr)
     localStorage.setItem('Books', JSON.stringify(booksArr))
     renderBooks()
-    // booksArr = localStorage['Books']
 }
 
 function changeStatusBook(id){

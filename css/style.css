@@ -12,6 +12,16 @@ body{
 .section-name{
     background-color: gray;
 }
+.dropzone-start{
+    height: 50px;
+    background-color: white;
+}
+.dropzone-drop{
+    height: 50px;
+    border: 2px dotted black;
+    background-color: honeydew;
+    text-align: center;
+}
 .addBook__form{
     display: none;
     flex-direction: column;

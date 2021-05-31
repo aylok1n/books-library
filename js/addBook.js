@@ -23,6 +23,7 @@ function sendBook(){
     localStorage['Books'] != undefined ? Books = JSON.parse(localStorage['Books']) : console.log('localStorage пуст')
     let formData = new FormData(uploadForm);
     let xhr = new XMLHttpRequest();
+
     xhr.open("POST", 'https://apiinterns.osora.ru/');
     xhr.onreadystatechange = function() {
         if (this.readyState != 4) return;
@@ -34,7 +35,8 @@ function sendBook(){
                 login:formData.get('login'),
                 text:JSON.parse(this.response).text,
                 id: Date.now(),
-                wasRead: false
+                wasRead: false,
+                isFavorite: false
             });
             localStorage.setItem('Books', JSON.stringify(Books));
             uploadForm.submit()
@@ -54,7 +56,8 @@ function writeBook(){
             login: formData.get('login'), 
             text:formData.get('text'),
             id: Date.now(),
-            wasRead: false
+            wasRead: false,
+            isFavorite: false
         })
         localStorage.setItem('Books', JSON.stringify(Books))
         uploadForm.submit()
